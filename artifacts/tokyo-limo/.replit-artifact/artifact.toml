@@ -1,0 +1,28 @@
+kind = "web"
+previewPath = "/"
+title = "Tokyo Limo"
+description = "A premium chauffeur and airport transportation website for Tokyo Limo, helping travelers and businesses book reliable private rides, executive transfers, tours, and event transportation."
+version = "1.0.0"
+id = "artifacts/tokyo-limo"
+router = "path"
+
+[[services]]
+name = "web"
+paths = [ "/" ]
+localPort = 22024
+
+[services.development]
+run = "pnpm --filter @workspace/tokyo-limo run dev"
+
+[services.production]
+build = [ "pnpm", "--filter", "@workspace/tokyo-limo", "run", "build" ]
+serve = "static"
+publicDir = "artifacts/tokyo-limo/dist/public"
+
+[[services.production.rewrites]]
+from = "/*"
+to = "/index.html"
+
+[services.env]
+PORT = "22024"
+BASE_PATH = "/"
