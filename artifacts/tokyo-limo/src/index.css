@@ -117,7 +117,7 @@ img { display: block; max-width: 100%; }
 .service-card:hover { transform: translateY(-5px); background: #1b3145; }
 .service-card:nth-child(1) { grid-column: span 7; }
 .service-card:nth-child(2) { grid-column: span 5; }
-.service-card:nth-child(3), .service-card:nth-child(4), .service-card:nth-child(5) { grid-column: span 4; }
+.service-card:nth-child(3), .service-card:nth-child(4), .service-card:nth-child(5), .service-card:nth-child(6) { grid-column: span 4; }
 .service-card::after { content: ''; position: absolute; width: 130px; height: 130px; right: -35px; bottom: -45px; border: 1px solid rgba(201,166,107,.25); transform: rotate(45deg); }
 .service-index { color: var(--gold); font: 10px var(--mono); }
 .service-card h3 { max-width: 260px; margin: 72px 0 13px; font: 34px/1 var(--display); }
@@ -143,8 +143,19 @@ img { display: block; max-width: 100%; }
 .fleet-tabs { display: flex; gap: 4px; }
 .fleet-tab { padding: 10px 13px; border: 0; background: transparent; color: var(--muted); font: 10px var(--mono); letter-spacing: .05em; text-transform: uppercase; }
 .fleet-tab.active, .fleet-tab:hover { background: var(--ink); color: var(--paper); }
+.fleet-rail { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; margin-bottom: 18px; }
+.fleet-card { min-width: 0; padding: 0 0 18px; border: 1px solid var(--line); background: var(--paper); color: var(--ink); text-align: left; transition: transform .25s ease, border-color .25s ease, box-shadow .25s ease; }
+.fleet-card:hover, .fleet-card.active { border-color: var(--vermillion); box-shadow: 0 12px 25px rgba(23,25,29,.08); transform: translateY(-3px); }
+.fleet-card-image { display: block; height: 180px; overflow: hidden; background: #d9eaf0; }
+.fleet-card-image img { width: 100%; height: 100%; object-fit: cover; transition: transform .45s ease; }
+.fleet-card:hover img, .fleet-card.active img { transform: scale(1.04); }
+.fleet-card-label, .fleet-card strong, .fleet-card-capacity { display: block; margin-left: 20px; margin-right: 20px; }
+.fleet-card-label { margin-top: 17px; color: var(--vermillion-deep); font: 9px var(--mono); letter-spacing: .11em; text-transform: uppercase; }
+.fleet-card strong { margin-top: 7px; font: 28px/1 var(--display); }
+.fleet-card-capacity { margin-top: 12px; color: var(--muted); font: 10px var(--mono); }
 .fleet-content { display: grid; grid-template-columns: 1.2fr .8fr; min-height: 420px; background: var(--ink); color: var(--paper); border-top: 5px solid var(--vermillion); }
 .fleet-visual { position: relative; min-height: 420px; overflow: hidden; background: #172d3c; }
+.fleet-visual img { width: 100%; height: 100%; min-height: 420px; object-fit: cover; opacity: .9; }
 .fleet-visual::before { content: ''; position: absolute; inset: 16% 5% 0; border: 1px solid rgba(201,166,107,.4); border-radius: 50% 50% 0 0; transform: perspective(500px) rotateX(55deg); }
 .fleet-visual::after { content: ''; position: absolute; left: 12%; right: 12%; bottom: 15%; height: 1px; background: var(--vermillion); box-shadow: 0 -37px 0 rgba(223,105,79,.22), 0 -74px 0 rgba(223,105,79,.1); }
 .fleet-car { position: absolute; left: 15%; right: 10%; bottom: 24%; height: 100px; border-radius: 55% 54% 20% 18%; background: linear-gradient(170deg, #40525e, #0d1c28 58%); box-shadow: 0 25px 40px rgba(0,0,0,.4); }
@@ -238,6 +249,8 @@ img { display: block; max-width: 100%; }
   .intro-grid, .quote-layout, .faq-layout { gap: 35px; }
   .service-card:nth-child(n) { grid-column: span 6; }
   .service-card:first-child { grid-column: span 12; }
+  .fleet-rail { grid-template-columns: repeat(3, minmax(240px, 1fr)); overflow-x: auto; padding-bottom: 8px; }
+  .fleet-card-image { height: 160px; }
   .fleet-content { grid-template-columns: 1fr; }
   .fleet-visual { min-height: 340px; }
   .fleet-spec { padding: 38px 30px; }
@@ -265,6 +278,7 @@ img { display: block; max-width: 100%; }
   .service-card h3 { margin-top: 56px; }
   .fleet-top { display: block; }
   .fleet-tabs { margin-top: 25px; overflow-x: auto; }
+  .fleet-rail { margin-right: -15px; grid-template-columns: repeat(3, 250px); }
   .fleet-visual { min-height: 270px; }
   .fleet-car { left: 7%; right: 4%; }
   .quote-stamp { justify-self: start; width: 210px; height: 210px; }

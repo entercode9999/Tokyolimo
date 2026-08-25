@@ -84,12 +84,13 @@ const content = {
       eyebrow: 'One service / many reasons',
       title: 'Wherever the day<br />takes you.',
       copy: 'From a first arrival at Haneda to the last guest leaving your reception, we make the in-between feel considered.',
-      cards: [
+       cards: [
         ['01 / ARRIVE', 'Airport transfers', 'Haneda and Narita, met with a name board and a quiet ride into the city.'],
         ['02 / MOVE', 'Business travel', 'A composed mobile office for executives, assistants and visiting teams.'],
         ['03 / MARK', 'Weddings & events', 'Precise arrivals, discreet coordination and room for the people who matter.'],
         ['04 / STAY', 'Hourly charter', 'Keep a dedicated car close for meetings, shopping, dinners or a full day out.'],
         ['05 / SEE', 'Tours & groups', 'From Tokyo to Hakone, travel farther with a Sprinter for the whole party.'],
+         ['06 / CONNECT', 'City-to-city', 'Door-to-door travel between Tokyo, Yokohama, Hakone, Kyoto and beyond.'],
       ],
     },
     promise: {
@@ -164,7 +165,7 @@ const content = {
     },
     trust: { lead: '東京をもっと<br />心地よく。', items: [['時間に正確', '分単位で対応'], ['明朗な料金', 'ご乗車前に確定'], ['土地の知識', '海外のお客様にも安心']] },
     standard: { eyebrow: '私たちの基準 / 01', jp: '静かに、正確に。', titleA: '東京は速く動く。', titleB: '私たちは、急がせません。', copy: '清潔な車内、街を知り尽くした乗務員、予定変更にも対応できる計画。旅を心地よくする細部を大切にした、東京のハイヤーサービスです。' },
-    services: { eyebrow: 'ひとつのサービス / 多彩な用途', title: '一日の行き先へ<br />丁寧に。', copy: '羽田での最初のお迎えから、パーティーの最後のお見送りまで。移動の時間も心地よく整えます。', cards: [['01 / ARRIVE', '空港送迎', '羽田・成田でネームボードを持ってお迎えし、静かな車内で都心へ。'], ['02 / MOVE', 'ビジネス利用', 'エグゼクティブやご出張チームのための、落ち着いた移動オフィス。'], ['03 / MARK', 'ウェディング・イベント', '正確な送迎と控えめな進行。大切な方々を安心してお任せください。'], ['04 / STAY', '時間貸しチャーター', '会議、ショッピング、会食、終日のご予定まで専用車で。'], ['05 / SEE', '観光・グループ', '東京から箱根まで、グループ全員で快適にお出かけいただけます。']] },
+     services: { eyebrow: 'ひとつのサービス / 多彩な用途', title: '一日の行き先へ<br />丁寧に。', copy: '羽田での最初のお迎えから、パーティーの最後のお見送りまで。移動の時間も心地よく整えます。', cards: [['01 / ARRIVE', '空港送迎', '羽田・成田でネームボードを持ってお迎えし、静かな車内で都心へ。'], ['02 / MOVE', 'ビジネス利用', 'エグゼクティブやご出張チームのための、落ち着いた移動オフィス。'], ['03 / MARK', 'ウェディング・イベント', '正確な送迎と控えめな進行。大切な方々を安心してお任せください。'], ['04 / STAY', '時間貸しチャーター', '会議、ショッピング、会食、終日のご予定まで専用車で。'], ['05 / SEE', '観光・グループ', '東京から箱根まで、グループ全員で快適にお出かけいただけます。'], ['06 / CONNECT', '都市間送迎', '東京、横浜、箱根、京都などへ、ドア・ツー・ドアでご案内します。']] },
     promise: { eyebrow: 'Tokyo Limoの約束 / 02', titleA: '明確な計画は', titleB: '心を軽くします。', copy: 'メーターではなく、実際の行程に合わせてお見積もりします。料金、車両、時間を事前に確認してから、道中は私たちにお任せください。', list: ['事前に確定する定額料金', 'フライトの到着状況を無料で確認', '昼夜を問わず担当者が対応'], cta: '行程を相談する', stamp: ['0', '料金の', 'サプライズ'] },
     fleet: { eyebrow: '車両 / 03', title: '静かな実力。', selected: '選択中の車両', capacity: '定員', luggage: '荷物', tabs: [['executive', 'セダン'], ['firstclass', 'MPV'], ['group', 'スプリンター']], vehicles: { executive: ['エグゼクティブ・セダン', '1～3名様に。静かな車内、ゆとりある足元、余裕のある到着をお約束します。', '1～3名', '大型2個'], firstclass: ['ファーストクラスMPV', '移動するプライベートラウンジ。ご家族やお荷物の多い空港送迎に最適です。', '1～5名', '大型4個'], group: ['スプリンター・グループ', '会話をひとつに。チーム、ウェディング、観光にゆとりある一台です。', '6～13名', '最大13個'] }, compare: [['おすすめ', '空港到着、役員送迎'], ['車内の雰囲気', '静かで控えめ'], ['ご予約時', '行程に合わせてご提案']] },
     airport: { eyebrow: '空港から旅館まで', title: '東京での最初の一時間を<br />私たちに。', copy: '羽田・成田でお待ちしています。フライトを確認し、荷物をお手伝いしながら、お客様のペースで街へ向かいます。', cta: '空港送迎を相談する' },
@@ -252,8 +253,10 @@ function Fleet({ locale }: { locale: Locale }) {
   const t = content[locale].fleet;
   const [active, setActive] = useState<'executive' | 'firstclass' | 'group'>('executive');
   const vehicle = t.vehicles[active];
+  const vehicleImages = { executive: 'fleet-sedan.jpg', firstclass: 'fleet-suv.jpg', group: 'fleet-sprinter.jpg' } as const;
   return <section className="fleet section-pad" id="fleet"><div className="container"><Reveal className="fleet-top"><div><span className="eyebrow">{t.eyebrow}</span><h2 className="display">{t.title}</h2></div><div className="fleet-tabs" role="tablist" aria-label="Fleet types">{t.tabs.map(([key, label]) => <button className={`fleet-tab ${active === key ? 'active' : ''}`} key={key} onClick={() => setActive(key as typeof active)} role="tab" aria-selected={active === key} data-testid={`button-fleet-${key}`}>{label}</button>)}</div></Reveal>
-    <Reveal><div className="fleet-content" data-testid="panel-fleet-details"><div className="fleet-visual" aria-label={`${vehicle[0]} vehicle illustration`}><div className="fleet-car" /></div><div className="fleet-spec"><span className="eyebrow light">{t.selected}</span><h3 className="display">{vehicle[0]}</h3><p>{vehicle[1]}</p><div className="specs"><div><span>{t.capacity}</span><strong>{vehicle[2]}</strong></div><div><span>{t.luggage}</span><strong>{vehicle[3]}</strong></div></div></div></div></Reveal>
+     <Reveal className="fleet-rail" data-testid="fleet-rail">{(Object.keys(t.vehicles) as Array<keyof typeof t.vehicles>).map((key) => <button className={`fleet-card ${active === key ? 'active' : ''}`} key={key} onClick={() => setActive(key)} role="tab" aria-selected={active === key} data-testid={`card-fleet-${key}`}><span className="fleet-card-image"><img src={`${import.meta.env.BASE_URL}images/${vehicleImages[key]}`} alt={t.vehicles[key][0]} /></span><span className="fleet-card-label">{t.tabs.find(([tabKey]) => tabKey === key)?.[1]}</span><strong>{t.vehicles[key][0]}</strong><span className="fleet-card-capacity">{t.vehicles[key][2]} · {t.vehicles[key][3]}</span></button>)}</Reveal>
+     <Reveal><div className="fleet-content" data-testid="panel-fleet-details"><div className="fleet-visual" aria-label={`${vehicle[0]} vehicle image`}><img src={`${import.meta.env.BASE_URL}images/${vehicleImages[active]}`} alt="" /></div><div className="fleet-spec"><span className="eyebrow light">{t.selected}</span><h3 className="display">{vehicle[0]}</h3><p>{vehicle[1]}</p><div className="specs"><div><span>{t.capacity}</span><strong>{vehicle[2]}</strong></div><div><span>{t.luggage}</span><strong>{vehicle[3]}</strong></div></div></div></div></Reveal>
     <div className="fleet-compare">{t.compare.map(([label, value]) => <div className="compare-note" key={label}><strong>{label}</strong><span>{value}</span></div>)}</div>
   </div></section>;
 }
